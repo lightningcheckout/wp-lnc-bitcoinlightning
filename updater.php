@@ -1,9 +1,8 @@
 <?php
-
 class WP_LNC_Bitcoinlightning_Updater {
 
 	private $file;
-	private $plugin;
+private $plugin;
 	private $basename;
 	private $active;
 	private $username;
@@ -42,7 +41,7 @@ class WP_LNC_Bitcoinlightning_Updater {
 	    if ( is_null( $this->github_response ) ) { // Do we have a response?
 		$args = array();
 	        $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases', $this->username, $this->repository ); // Build URI
-
+		    var_dump($request_uri);
 		$args = array();
 
 	        if( $this->authorize_token ) { // Is there an access token?
@@ -63,7 +62,7 @@ class WP_LNC_Bitcoinlightning_Updater {
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'modify_transient' ), 10, 1 );
 		add_filter( 'plugins_api', array( $this, 'plugin_popup' ), 10, 3);
 		add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
-		
+
 		// Add Authorization Token to download_package
 		add_filter( 'upgrader_pre_download',
 			function() {
@@ -80,8 +79,7 @@ class WP_LNC_Bitcoinlightning_Updater {
 			if( $checked = $transient->checked ) { // Did Wordpress check for updates?
 
 				$this->get_repository_info(); // Get the repo info
-
-				$out_of_date = version_compare( $this->github_response['tag_name'], $checked[ $this->basename ], 'gt' ); // Check if we're out of date
+				$out_of_date = version_compare( $this->github_response['tag_name'], $checked[ $this->basename ] ); // Check if we're out of date
 
 				if( $out_of_date ) {
 
@@ -107,7 +105,7 @@ class WP_LNC_Bitcoinlightning_Updater {
 	public function plugin_popup( $result, $action, $args ) {
 
 		if( ! empty( $args->slug ) ) { // If there is a slug
-			
+
 			if( $args->slug == current( explode( '/' , $this->basename ) ) ) { // And it's our slug
 
 				$this->get_repository_info(); // Get our repo info
@@ -116,12 +114,6 @@ class WP_LNC_Bitcoinlightning_Updater {
 				$plugin = array(
 					'name'				=> $this->plugin["Name"],
 					'slug'				=> $this->basename,
-					'requires'			=> '3.3',
-					'tested'			=> '4.4.1',
-					'rating'			=> '100.0',
-					'num_ratings'		=> '10823',
-					'downloaded'		=> '14249',
-					'added'				=> '2016-01-05',
 					'version'			=> $this->github_response['tag_name'],
 					'author'			=> $this->plugin["AuthorName"],
 					'author_profile'	=> $this->plugin["AuthorURI"],
@@ -141,15 +133,15 @@ class WP_LNC_Bitcoinlightning_Updater {
 		}
 		return $result; // Otherwise return default
 	}
-	
+
 	public function download_package( $args, $url ) {
 
 		if ( null !== $args['filename'] ) {
-			if( $this->authorize_token ) { 
+			if( $this->authorize_token ) {
 				$args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
 			}
 		}
-		
+
 		remove_filter( 'http_request_args', [ $this, 'download_package' ] );
 
 		return $args;
