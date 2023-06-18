@@ -18,7 +18,7 @@ include_once( plugin_dir_path( __FILE__ ) . 'updater.php');
 
 $updater = new WP_LNC_Bitcoinlightning_Updater( __FILE__ ); // instantiate our class
 $updater->set_username( 'lightningcheckout' ); // set username
-$updater->set_repository( ' wp-lnc-bitcoinlightning' ); // set repo
+$updater->set_repository( 'wp-lnc-bitcoinlightning' ); // set repo
 
 $updater->initialize();
 

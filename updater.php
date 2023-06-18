@@ -1,4 +1,5 @@
 <?php
+
 class WP_LNC_Bitcoinlightning_Updater {
 
 	private $file;
@@ -41,7 +42,7 @@ class WP_LNC_Bitcoinlightning_Updater {
 	    if ( is_null( $this->github_response ) ) { // Do we have a response?
 		$args = array();
 	        $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases', $this->username, $this->repository ); // Build URI
-		    
+
 		$args = array();
 
 	        if( $this->authorize_token ) { // Is there an access token?
