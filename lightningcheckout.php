@@ -1,11 +1,12 @@
 <?php
 
 /*
-Plugin Name: Lightning Checkout (payment gateway)
+Plugin Name: Lightning Checkout (WooCommerce payment gateway)
 Plugin URI: https://lightningcheckout.eu
 Description: Accept Bitcoin over Lightning instantly. Brought to you by Lightning Checkout
-Version: 1.1.2
+Version: 1.1.3
 Author: Lightning Checkout
+Fork of: https://nl.wordpress.org/plugins/lightning-payment-gateway-lnbits/
 */
 
 
@@ -110,13 +111,13 @@ function lightningcheckout_init() {
             $this->id = 'lightningcheckout';
             $this->icon = plugin_dir_url(__FILE__).'assets/lightning.png';
             $this->has_fields = false;
-            $this->method_title = 'Bitcoing Lightning Checkout';
-            $this->method_description = 'Accept payments in Bitcoin over Lightning, via Lightning Checkout.';
+            $this->method_title = 'Bitcoin';
+            $this->method_description = 'Accept bitcoin payments via Lightning Checkout.';
 
             $this->init_form_fields();
             $this->init_settings();
 
-            $this->title = 'Bitcoin via Lightning Network';
+            $this->title = 'Bitcoin (lightning)';
             $this->description = '';
 
             $url = 'https://pay.lightningcheckout.eu';
@@ -158,7 +159,7 @@ function lightningcheckout_init() {
                 'lightningcheckout_api_key' => array(
                     'title' => __('API Key', 'woocommerce'),
                     'type' => 'text',
-                    'description' => __(get_bloginfo() . ' Your personal API Key. You received the key via our support team.', 'woocommerce'),
+                    'description' => __(get_bloginfo() . ' Your personal Lightning Checkout API Key. You can request it via our support team.', 'woocommerce'),
                     'default' => '',
                 ),
             );
@@ -227,7 +228,7 @@ function lightningcheckout_init() {
 
             if ($r['status'] == 200) {
                 if ($r['response']['paid'] == true) {
-                    $order->add_order_note('Payment is settled and has been credited to your Lightning Checkout account. Purchased goods/services can be securely delivered to the customer.');
+                    $order->add_order_note('Payment is settled and added to your Lightning Checkout balance.');
                     $order->payment_complete();
                     $order->save();
                     error_log("PAID");
