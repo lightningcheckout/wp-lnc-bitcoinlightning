@@ -4,7 +4,7 @@
 Plugin Name: Lightning Checkout (WooCommerce payment gateway)
 Plugin URI: https://lightningcheckout.eu
 Description: Accept Bitcoin over Lightning instantly. Brought to you by Lightning Checkout
-Version: 1.1.4
+Version: 1.1.5
 Author: Lightning Checkout
 Fork of: https://nl.wordpress.org/plugins/lightning-payment-gateway-lnbits/
 */
@@ -150,8 +150,8 @@ function lightningcheckout_init() {
             // echo("init_form_fields");
             $this->form_fields = array(
                 'enabled' => array(
-                    'title' => __('Enable Lightning Checkout', 'woocommerce'),
-                    'label' => __('Enable Bitcoin payments via the Lightning network', 'woocommerce'),
+                    'title' => __('Lightning Checkout', 'woocommerce'),
+                    'label' => __('Enable bitcoin payments via the Lightning network', 'woocommerce'),
                     'type' => 'checkbox',
                     'description' => '',
                     'default' => 'no',
@@ -159,7 +159,7 @@ function lightningcheckout_init() {
                 'lightningcheckout_api_key' => array(
                     'title' => __('API Key', 'woocommerce'),
                     'type' => 'text',
-                    'description' => __(get_bloginfo() . ' Your personal Lightning Checkout API Key. You can request it via our support team.', 'woocommerce'),
+                    'description' => __(get_bloginfo() . ', Enter your personal API key. Get one via https://lightningcheckout.eu/en/contact/', 'woocommerce'),
                     'default' => '',
                 ),
             );
