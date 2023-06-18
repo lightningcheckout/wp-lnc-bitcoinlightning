@@ -9,6 +9,19 @@ Author: Lightning Checkout
 Fork of: https://nl.wordpress.org/plugins/lightning-payment-gateway-lnbits/
 */
 
+if( ! class_exists( 'WP_LNC_Bitcoinlightning_Updater' ) ){
+	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
+}
+
+// Include our updater file
+include_once( plugin_dir_path( __FILE__ ) . 'updater.php');
+
+$updater = new WP_LNC_Bitcoinlightning_Updater( __FILE__ ); // instantiate our class
+$updater->set_username( 'lightningcheckout' ); // set username
+$updater->set_repository( ' wp-lnc-bitcoinlightning' ); // set repo
+
+$updater->initialize();
+
 
 add_action('plugins_loaded', 'lightningcheckout_init');
 
