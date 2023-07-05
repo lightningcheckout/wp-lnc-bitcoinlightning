@@ -1,5 +1,5 @@
 
-<div style="text-align:center"><img src="<?php echo plugin_dir_url( __FILE__ ) . 'images/countdown.gif'; ?>" width="90"></div>
+<div style="text-align:center"><p id="lnexpiry"></p></div>
 <div class="qr_invoice" id="qr_invoice">
 
 	<a href="lightning:<?php echo esc_textarea($invoice) ?>"><div id="qrcode"></div></a>
@@ -15,6 +15,35 @@
  jQuery('#qrcode').qrcode("<?php echo esc_textarea($invoice) ?>");
 </script>
 
+<script>
+// Set the date we're counting down to
+var now = new Date();
+now.setMinutes(now.getMinutes() + 15); // timestamp
+var countDownDate = new Date(now); // Date object
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Output the result in an element with id="demo"
+  document.getElementById("lnexpiry").innerHTML = minutes + "m " + seconds + "s ";
+
+  // If the count down is over, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("lnexpiry").innerHTML = "Invoice Expired";
+  }
+}, 30);
+</script>
 
 <script type="text/javascript">
 	var $ = jQuery;
