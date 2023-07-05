@@ -18,10 +18,6 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 	'wp-lnc-bitcoinlightning'
 );
 
-//Allow only beta versions (e.g. for testing).
-$updateChecker->getVcsApi()->setReleaseVersionFilter(
-    Api::RELEASE_FILTER_SKIP_PRERELEASE
-);
 
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
