@@ -1,10 +1,10 @@
 <?php
 
 /*
-Plugin Name: Lightning Checkout (WooCommerce payment gateway)
+Plugin Name: Bitcoin Payment Gateway (lightning)
 Plugin URI: https://lightningcheckout.eu
 Description: Accept Bitcoin over Lightning instantly. Brought to you by Lightning Checkout
-Version: 1.1.6
+Version: 1.2
 Author: Lightning Checkout
 Fork of: https://nl.wordpress.org/plugins/lightning-payment-gateway-lnbits/
 */
