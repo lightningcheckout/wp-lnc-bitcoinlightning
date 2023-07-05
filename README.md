@@ -5,6 +5,10 @@ Bitcoin payment gateway proviced by Lightning Checkout.
 == Description ==
 
 Bitcoin payment gateway proviced by Lightning Checkout.
+
+Autoupdates by https://github.com/YahnisElsts/plugin-update-checker#github-integration
+
+
 == Changelog ==
 
 = 1.4 =
