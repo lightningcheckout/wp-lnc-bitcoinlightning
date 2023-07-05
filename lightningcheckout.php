@@ -4,23 +4,28 @@
 Plugin Name: Bitcoin Payment Gateway (lightning)
 Plugin URI: https://lightningcheckout.eu
 Description: Accept Bitcoin over Lightning instantly. Brought to you by Lightning Checkout
-Version: 1.3
+Version: 1.4
 Author: Lightning Checkout
 Fork of: https://nl.wordpress.org/plugins/lightning-payment-gateway-lnbits/
 */
 
-if( ! class_exists( 'WP_LNC_Bitcoinlightning_Updater' ) ){
-	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
-}
+require 'plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
-// Include our updater file
-include_once( plugin_dir_path( __FILE__ ) . 'updater.php');
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/user-name/repo-name/',
+	__FILE__,
+	'unique-plugin-or-theme-slug'
+);
 
-$updater = new WP_LNC_Bitcoinlightning_Updater( __FILE__ ); // instantiate our class
-$updater->set_username( 'lightningcheckout' ); // set username
-$updater->set_repository( 'wp-lnc-bitcoinlightning' ); // set repo
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
 
-$updater->initialize();
+//Optional: If you're using a private repository, specify the access token like this:
+//$myUpdateChecker->setAuthentication('your-token-here');
+
+//If you want to use release assets, call the enableReleaseAssets() method after creating the update checker instance:
+$myUpdateChecker->getVcsApi()->enableReleaseAssets();
 
 
 add_action('plugins_loaded', 'lightningcheckout_init');
