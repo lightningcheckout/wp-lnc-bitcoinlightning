@@ -3,8 +3,8 @@
 /*
 Plugin Name: Bitcoin Payment Gateway (lightning)
 Plugin URI: https://lightningcheckout.eu
-Description: Accept Bitcoin over Lightning instantly. Brought to you by Lightning Checkout
-Version: 1.4.2
+Description: Accept Bitcoin over the lightning network. Brought to you by Lightning Checkout
+Version: 1.5
 Author: Lightning Checkout
 Fork of: https://nl.wordpress.org/plugins/lightning-payment-gateway-lnbits/
 */
@@ -16,6 +16,11 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 	'https://github.com/lightningcheckout/wp-lnc-bitcoinlightning/',
 	__FILE__,
 	'wp-lnc-bitcoinlightning'
+);
+
+//Allow only beta versions (e.g. for testing).
+$updateChecker->getVcsApi()->setReleaseVersionFilter(
+    Api::RELEASE_FILTER_SKIP_PRERELEASE
 );
 
 //Set the branch that contains the stable release.
