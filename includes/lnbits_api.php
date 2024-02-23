@@ -15,13 +15,14 @@ class LNBitsAPI {
         $this->api_key = $api_key;
     }
 
-    public function createInvoice($amount, $memo) {
+    public function createInvoice($amount, $memo, $extra_data) {
         $c = new CurlWrapper();
         $data = array(
             "out" => false,
             "amount" => $amount,
             "memo" => $memo,
-            "webhook" => "https://portal.lightningcheckout.eu/webhook/paymentupdate"
+            "webhook" => "https://portal.lightningcheckout.eu/webhook/paymentupdate",
+            "extra" => json_decode($extra_data)
         );
         $headers = array(
             'X-Api-Key' => $this->api_key,
