@@ -207,8 +207,9 @@ function lightningcheckout_init() {
             $memo = SITE_NAME." order ".$order->get_id()." (".$order->get_total() ." ".get_woocommerce_currency().")";
 
             $amount = Utils::convert_to_satoshis($order->get_total(), get_woocommerce_currency());
+            $extra_data = '{"lnc_product":"BTCWEBSHOP","lnc_amount":'.$order->get_total().',"lnc_currency": "'.get_woocommerce_currency().'"}';
 
-            $r = $this->api->createInvoice($amount, $memo);
+            $r = $this->api->createInvoice($amount, $memo, $extra_data);
 
             if ($r['status'] == 201) {
                 $resp = $r['response'];
