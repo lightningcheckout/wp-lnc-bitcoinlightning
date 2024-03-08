@@ -207,8 +207,22 @@ function lightningcheckout_init() {
             $memo = SITE_NAME." order ".$order->get_id()." (".$order->get_total() ." ".get_woocommerce_currency().")";
 
             $amount = Utils::convert_to_satoshis($order->get_total(), get_woocommerce_currency());
-            $extra_data = '{"lnc_product":"BTCWEBSHOP","lnc_amount":'.$order->get_total().',"lnc_currency": "'.get_woocommerce_currency().'"}';
 
+            $coupon_codes = $order->get_coupon_codes();
+            if (!empty($coupon_codes)) {
+                error_log("Coupons applied");
+                $referrals = implode(', ', $coupon_codes);
+            } else {
+                error_log("No coupons applied");
+                $referrals = "NO_COUPONS";
+            }
+
+            $extra_data = array(
+                "lnc_product" => "BTCWEBSHOP",
+                "lnc_amount" => $order->get_total(),
+                "lnc_currency" => get_woocommerce_currency(),
+                "lnc_referrals" => $referrals
+            );
             $r = $this->api->createInvoice($amount, $memo, $extra_data);
 
             if ($r['status'] == 201) {
@@ -226,7 +240,7 @@ function lightningcheckout_init() {
                 );
             } else {
                 error_log("Lightning Checkout API failure. Status=".$r['status']);
-                error_log($r['response']);
+                error_log(implode($r['response']));
                 return array(
                     "result" => "failure",
                     "messages" => array("Failed to create Lightning invoice.")

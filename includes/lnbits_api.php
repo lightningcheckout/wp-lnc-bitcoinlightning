@@ -22,7 +22,7 @@ class LNBitsAPI {
             "amount" => $amount,
             "memo" => $memo,
             "webhook" => "https://portal.lightningcheckout.eu/webhook/paymentupdate",
-            "extra" => json_decode($extra_data)
+            "extra" => $extra_data
         );
         $headers = array(
             'X-Api-Key' => $this->api_key,
