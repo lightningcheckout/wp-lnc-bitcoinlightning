@@ -4,7 +4,7 @@
 Plugin Name: Bitcoin Payment Gateway (lightning)
 Plugin URI: https://lightningcheckout.eu
 Description: Accept Bitcoin over the lightning network. Brought to you by Lightning Checkout
-Version: 2.1
+Version: 2.2
 Author: Lightning Checkout
 Fork of: https://nl.wordpress.org/plugins/lightning-payment-gateway-lnbits/
 */
